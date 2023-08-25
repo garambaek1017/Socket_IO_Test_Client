@@ -92,6 +92,21 @@ namespace SocketIOTestClient.Network
             EventHandlers.Add(resEventName, publisher);
         }
 
+
+        public async Task TryDisconnect()
+        {
+            if (SocketState == RamSocketIOState.Connected)
+            {
+                // todo : 이 토큰 클래스가 뭔지 확인 
+                CancellationTokenSource source = new CancellationTokenSource();
+                CancellationToken token = source.Token;
+                
+                await ClientWebSocket.CloseAsync(WebSocketCloseStatus.Empty, "client disconect..", token);
+
+                RLogger.Debug($"disconnect to uri {ServerUri.ToString()} is Done!");
+            }
+        }
+
         /// <summary>
         /// Packet Dispatcher
         /// </summary>

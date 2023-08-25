@@ -24,7 +24,6 @@ namespace SocketIOTestClient
                 RLogger.Error(e.StackTrace.ToString());
             }
         }
-
         
     }
 }

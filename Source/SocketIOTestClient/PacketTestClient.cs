@@ -27,10 +27,16 @@ namespace SocketIOTestClient
                     case "send":
                         SocketIOManager.Instance.SendTestMessage();
                         break;
-                    case "clear":
+
+                    case "disconnect":
+                        SocketIOManager.Instance.Disconnect();
+                        break;
+
+                    default:
                         Console.Clear();
                         ShowCommand();
                         break;
+                    
                 }
             }
         }
@@ -39,7 +45,8 @@ namespace SocketIOTestClient
             RLogger.Debug("Enter your command..");
             RLogger.Debug("1. connect - connect to server");
             RLogger.Debug("2. send - send a message to server");
-            RLogger.Debug("3. Show command");
+            RLogger.Debug("3. disconnect");
+            RLogger.Debug("4. Show command");
         }
 
         public static void DisplayReceiveMessage(string receivedMessage)

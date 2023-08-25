@@ -43,5 +43,13 @@ namespace SocketIOTestClient
 
             await RamSocket.Emit("RequestTestMsg", PacketHelper.ToByteString(packet));
         }
+
+        public async void Disconnect()
+        {
+            if(RamSocket != null && RamSocket.SocketState == RamSocketIOState.Connected)
+                await RamSocket.TryDisconnect();
+            else
+                RLogger.Debug($"Try Connect first");
+        }
     }
 }
