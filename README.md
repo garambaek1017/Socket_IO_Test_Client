@@ -19,12 +19,14 @@
 날짜|내용
 ---|---
 2023-08-24|connection, send, receive 가능 
+2023-08-25|disconnect 추가 
 
 
 <br><br>
 
 ## :pencil2: Todo 
-- Dicconnect
+- ~~Dicconnect~~
+- 코드 정리
 
 
 
