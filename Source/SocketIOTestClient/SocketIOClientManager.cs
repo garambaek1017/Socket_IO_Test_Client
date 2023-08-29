@@ -1,8 +1,6 @@
 ﻿using RLog;
-using SocketIOTestClient.Network;
+using Socket_IO_LIb.Network;
 using System;
-using System.Net.Sockets;
-using System.Security.Permissions;
 
 namespace SocketIOTestClient
 {

@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SocketIOTestClient.Network
+namespace Socket_IO_LIb.Network
 {
     public enum RamSocketIOState
     {

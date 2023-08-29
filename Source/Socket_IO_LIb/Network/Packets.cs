@@ -1,6 +1,6 @@
 ﻿using MessagePack;
 
-namespace SocketIOTestClient.Network
+namespace Socket_IO_LIb.Network
 {
     /// <summary>
     /// request packet

@@ -1,7 +1,7 @@
 ﻿using MessagePack;
 using System;
 
-namespace SocketIOTestClient.Network
+namespace Socket_IO_LIb.Network
 {
     public class PacketHelper
     {

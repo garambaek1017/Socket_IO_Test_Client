@@ -1,10 +1,7 @@
 ﻿using RLog;
-using SocketIOClient.Messages;
-using SocketIOTestClient.Network;
+using Socket_IO_LIb.Network;
 using System;
-using System.Text;
 using System.Threading;
-using System.Windows.Forms;
 
 namespace SocketIOTestClient
 {
