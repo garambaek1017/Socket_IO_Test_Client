@@ -8,9 +8,9 @@ namespace SocketIOTestClient.Network
     [MessagePackObject]
     public class RequestPacket
     {
-        [Key("Nickname")]
+        [Key("nickname")]
         public string Nickname { get; set; }
-        [Key("Message")]
+        [Key("message")]
         public string Message { get; set; }
     }
 
@@ -21,9 +21,9 @@ namespace SocketIOTestClient.Network
     [MessagePackObject]
     public class ResponsePacket
     {
-        [Key("ErrorCode")]
-        public int ErrorCode { get; set; }
-        [Key("Message")]
+        [Key("nickname")]
+        public string Nickname { get; set; }
+        [Key("message")]
         public string Message { get; set; }
     }
 }

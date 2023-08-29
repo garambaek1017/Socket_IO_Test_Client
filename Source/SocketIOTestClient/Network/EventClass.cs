@@ -1,5 +1,4 @@
-﻿using RLog;
-using System;
+﻿using System;
 
 namespace SocketIOTestClient.Network
 {
@@ -28,8 +27,6 @@ namespace SocketIOTestClient.Network
 
             // 리스펀스 패킷으로 변환 후 화면 표기 
             var resultPacket = PacketHelper.ToPacket<ResponsePacket>(decoded);
-
-            PacketTestClient.DisplayReceiveMessage(resultPacket.Message);
         }
     }
 }

@@ -5,18 +5,17 @@ namespace SocketIOTestClient
 {
     class Program
     {
-        public static string server_version = "2.2.3";
-
-
         static void Main(string[] args)
         {
             RLogger.Init();
 
-            RLogger.Debug("start socket io test client");
+            RLogger.Debug(" === Start Socket.IO Chatting Client === ");
 
             try
             {
-                PacketTestClient.Run();
+                var simpleChat = new SimpleChat();
+
+                simpleChat.Run();
             }
             catch (Exception e)
             {
@@ -24,6 +23,6 @@ namespace SocketIOTestClient
                 RLogger.Error(e.StackTrace.ToString());
             }
         }
-        
+
     }
 }
