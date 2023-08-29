@@ -16,6 +16,8 @@ namespace SocketIOTestClient.Network
         Disconnected = 2,
     }
 
+    public delegate void DelegateResponseProcessor(string response);
+
     /// <summary>
     /// For node.js - socket io 
     /// using .net Client webSocket.
@@ -34,6 +36,9 @@ namespace SocketIOTestClient.Network
 
         // event Handlers
         public Dictionary<string, EventPublisher> EventHandlers { get; set; } = new Dictionary<string, EventPublisher>();
+
+        public Dictionary<string, DelegateResponseProcessor> ResponseHandlers { get; set; } = new Dictionary<string, DelegateResponseProcessor>();
+
 
         public RamSocket()
         {
@@ -92,6 +97,10 @@ namespace SocketIOTestClient.Network
             EventHandlers.Add(resEventName, publisher);
         }
 
+        public void On(string resEventName, DelegateResponseProcessor responseHandler)
+        {
+            ResponseHandlers.Add(resEventName, responseHandler);
+        }
 
         public async Task TryDisconnect()
         {
@@ -100,7 +109,7 @@ namespace SocketIOTestClient.Network
                 // todo : 이 토큰 클래스가 뭔지 확인 
                 CancellationTokenSource source = new CancellationTokenSource();
                 CancellationToken token = source.Token;
-                
+
                 await ClientWebSocket.CloseAsync(WebSocketCloseStatus.Empty, "client disconect..", token);
 
                 RLogger.Debug($"disconnect to uri {ServerUri.ToString()} is Done!");
@@ -112,7 +121,7 @@ namespace SocketIOTestClient.Network
         /// </summary>
         async void Dispatcher()
         {
-            byte[] receiveBuffer = new byte[1024];
+            byte[] receiveBuffer = new byte[1024 * 128];
 
             while (ClientWebSocket.State == WebSocketState.Open)
             {
@@ -148,13 +157,22 @@ namespace SocketIOTestClient.Network
                             var responseArray = newResponseString.Split(',');
 
                             var (eventName, data) = Filter(responseArray);
-                            if (EventHandlers.TryGetValue(eventName, out var eventHandler) == true)
+                            //if (EventHandlers.TryGetValue(eventName, out var eventHandler) == true)
+                            //{
+                            //    eventHandler.RaiseEvent(data);
+                            //}
+                            //else
+                            //{
+                            //    RLogger.Debug($"Not found event : {eventName}"); 
+                            //}
+
+                            if (ResponseHandlers.TryGetValue(eventName, out var responseHandler) == true)
                             {
-                                eventHandler.RaiseEvent(data);
+                                responseHandler.Invoke(data);
                             }
                             else
                             {
-                                RLogger.Debug($"Not found event : {eventName}"); 
+                                RLogger.Debug($"Not found event : {eventName}");
                             }
                         }
                     }
